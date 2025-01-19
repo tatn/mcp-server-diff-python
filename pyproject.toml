@@ -1,10 +1,6 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
 name = "mcp-server-diff-python"
-version = "0.1.0"
+version = "0.1.1"
 description = "This is an MCP server that gets the difference between two texts."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -58,7 +54,7 @@ target-version = ['py311']
 include = '\.pyi?$'
 
 [tool.ruff]
-select = ["E", "F", "I", "N"]
+lint.select = ["E", "F", "I", "N"]
 line-length = 88
 target-version = "py311"
 

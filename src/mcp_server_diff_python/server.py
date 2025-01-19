@@ -1,11 +1,12 @@
 import difflib
 
-from mcp.server.models import InitializationOptions
+import mcp.server.stdio
 import mcp.types as types
 from mcp.server import NotificationOptions, Server
-import mcp.server.stdio
+from mcp.server.models import InitializationOptions
 
 server = Server("mcp-server-diff-python")
+
 
 @server.list_tools()
 async def handle_list_tools() -> list[types.Tool]:
@@ -16,7 +17,7 @@ async def handle_list_tools() -> list[types.Tool]:
     return [
         types.Tool(
             name="get-unified-diff",
-            description="Get the difference between two text articles in Unified diff format. Use this when you want to extract the difference between texts.",
+            description="Get the difference between two text articles in Unified diff format. Use this when you want to extract the difference between texts.",  # noqa: E501
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -27,6 +28,7 @@ async def handle_list_tools() -> list[types.Tool]:
             },
         )
     ]
+
 
 @server.call_tool()
 async def handle_call_tool(
@@ -48,16 +50,10 @@ async def handle_call_tool(
     if string_a is None or string_b is None:
         raise ValueError("Missing 'string_a' or 'string_b' in arguments")
 
-    diff_iterator = difflib.unified_diff(
-        string_a.splitlines(), string_b.splitlines()
-    )
+    diff_iterator = difflib.unified_diff(string_a.splitlines(), string_b.splitlines())
 
-    return [
-        types.TextContent(
-            type="text",
-            text="\n".join(diff_iterator)
-        )
-    ]
+    return [types.TextContent(type="text", text="\n".join(diff_iterator))]
+
 
 async def main():
     # Run the server using stdin/stdout streams
