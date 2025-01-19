@@ -1,111 +1,67 @@
 # mcp-server-diff-python MCP server
 
-A MCP server project
+テキストの差分を取得するためのMCPサーバーです。
+Pythonの標準ライブラリ`difflib`を利用して、2つのテキスト間の差分をUnified diff形式で提供します。
 
-## Components
+## 機能
 
-### Resources
+### ツール
 
-The server implements a simple note storage system with:
-- Custom note:// URI scheme for accessing individual notes
-- Each note resource has a name, description and text/plain mimetype
+サーバーは以下の単一のツールを提供します：
 
-### Prompts
+- **get-unified-diff**: 2つのテキスト間の差分をUnified diff形式で取得します
+  - 引数：
+    - `string_a`: 比較元のテキスト（必須）
+    - `string_b`: 比較先のテキスト（必須）
+  - 戻り値：Unified diff形式のテキスト
 
-The server provides a single prompt:
-- summarize-notes: Creates summaries of all stored notes
-  - Optional "style" argument to control detail level (brief/detailed)
-  - Generates prompt combining all current notes with style preference
+## インストール方法
 
-### Tools
+### Claude Desktop
 
-The server implements one tool:
-- add-note: Adds a new note to the server
-  - Takes "name" and "content" as required string arguments
-  - Updates server state and notifies clients of resource changes
+#### MacOS
+設定ファイルのパス: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
 
-## Configuration
+#### Windows
+設定ファイルのパス: `%APPDATA%/Claude/claude_desktop_config.json`
 
-[TODO: Add configuration details specific to your implementation]
-
-## Quickstart
-
-### Install
-
-#### Claude Desktop
-
-On MacOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
-On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
-
-<details>
-  <summary>Development/Unpublished Servers Configuration</summary>
-  ```
-  "mcpServers": {
-    "mcp-server-diff-python": {
-      "command": "uv",
-      "args": [
-        "--directory",
-        "E:\home\publish\mcp-server-diff-python",
-        "run",
-        "mcp-server-diff-python"
-      ]
-    }
+```json
+"mcpServers": {
+  "mcp-server-diff-python": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-diff-python"
+    ]
   }
-  ```
-</details>
+}
+```
 
-<details>
-  <summary>Published Servers Configuration</summary>
-  ```
-  "mcpServers": {
-    "mcp-server-diff-python": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-diff-python"
-      ]
-    }
+```json
+"mcpServers": {
+  "mcp-server-diff-python": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "path\\to\\mcp-server-diff-python",
+      "run",
+      "mcp-server-diff-python"
+    ]
   }
-  ```
-</details>
-
-## Development
-
-### Building and Publishing
-
-To prepare the package for distribution:
-
-1. Sync dependencies and update lockfile:
-```bash
-uv sync
+}
 ```
 
-2. Build package distributions:
-```bash
-uv build
-```
-
-This will create source and wheel distributions in the `dist/` directory.
-
-3. Publish to PyPI:
-```bash
-uv publish
-```
-
-Note: You'll need to set PyPI credentials via environment variables or command flags:
-- Token: `--token` or `UV_PUBLISH_TOKEN`
-- Or username/password: `--username`/`UV_PUBLISH_USERNAME` and `--password`/`UV_PUBLISH_PASSWORD`
-
-### Debugging
-
-Since MCP servers run over stdio, debugging can be challenging. For the best debugging
-experience, we strongly recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
+## 開発
+### デバッグ
 
 
-You can launch the MCP Inspector via [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with this command:
+
+[`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)を使用して、以下のコマンドでMCP Inspectorを起動できます：
 
 ```bash
-npx @modelcontextprotocol/inspector uv --directory E:\home\publish\mcp-server-diff-python run mcp-server-diff-python
+npx @modelcontextprotocol/inspector uv --directory path\to\mcp-server-diff-python run mcp-server-diff-python
 ```
 
+```bash
+npx @modelcontextprotocol/inspector uvx mcp-server-diff-python
+```
 
-Upon launching, the Inspector will display a URL that you can access in your browser to begin debugging.
