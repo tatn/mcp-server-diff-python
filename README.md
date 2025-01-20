@@ -3,6 +3,8 @@
 An MCP server for obtaining text differences between two strings.
 This server leverages Python's standard library `difflib` to efficiently generate and provide differences between two texts in Unified diff format, making it ideal for text comparison and version control purposes.
 
+<a href="https://glama.ai/mcp/servers/qbwsx2g4vd"><img width="380" height="200" src="https://glama.ai/mcp/servers/qbwsx2g4vd/badge" alt="Server Diff Python MCP server" /></a>
+
 ## Features
 
 ### Tools
