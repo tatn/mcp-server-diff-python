@@ -1,29 +1,29 @@
-# mcp-server-diff-python MCP server
+# mcp-server-diff-python
 
-テキストの差分を取得するためのMCPサーバーです。
-Pythonの標準ライブラリ`difflib`を利用して、2つのテキスト間の差分をUnified diff形式で提供します。
+An MCP server for obtaining text differences between two strings.
+This server leverages Python's standard library `difflib` to efficiently generate and provide differences between two texts in Unified diff format, making it ideal for text comparison and version control purposes.
 
-## 機能
+## Features
 
-### ツール
+### Tools
 
-サーバーは以下の単一のツールを提供します：
+The server provides a single tool:
 
-- **get-unified-diff**: 2つのテキスト間の差分をUnified diff形式で取得します
-  - 引数：
-    - `string_a`: 比較元のテキスト（必須）
-    - `string_b`: 比較先のテキスト（必須）
-  - 戻り値：Unified diff形式のテキスト
+- **get-unified-diff**: Get differences between two texts in Unified diff format
+  - Arguments:
+    - `string_a`: Source text for comparison (required)
+    - `string_b`: Target text to compare against (required)
+  - Return value: A string containing the differences in Unified diff format
 
-## インストール方法
+## Usage
 
 ### Claude Desktop
 
-#### MacOS
-設定ファイルのパス: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
+Using with Claude Desktop
+To use with Claude Desktop, add the server config:
 
-#### Windows
-設定ファイルのパス: `%APPDATA%/Claude/claude_desktop_config.json`
+On MacOS:  `~/Library/Application\ Support/Claude/claude_desktop_config.json`  
+On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
 
 ```json
 "mcpServers": {
@@ -34,6 +34,15 @@ Pythonの標準ライブラリ`difflib`を利用して、2つのテキスト間�
     ]
   }
 }
+```
+
+or Add the following configuration:
+
+```json
+git clone https://github.com/tatn/mcp-server-diff-python.git
+cd mcp-server-diff-python
+uv sync
+uv build
 ```
 
 ```json
@@ -50,18 +59,16 @@ Pythonの標準ライブラリ`difflib`を利用して、2つのテキスト間�
 }
 ```
 
-## 開発
-### デバッグ
+## Development
+### Debugging
 
-
-
-[`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)を使用して、以下のコマンドでMCP Inspectorを起動できます：
-
-```bash
-npx @modelcontextprotocol/inspector uv --directory path\to\mcp-server-diff-python run mcp-server-diff-python
-```
+You can start the MCP Inspector using [npx](https://docs.npmjs.com/cli/v11/commands/npx)with the following commands:
 
 ```bash
 npx @modelcontextprotocol/inspector uvx mcp-server-diff-python
+```
+
+```bash
+npx @modelcontextprotocol/inspector uv --directory path\to\mcp-server-diff-python run mcp-server-diff-python
 ```
 
