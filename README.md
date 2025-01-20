@@ -38,7 +38,7 @@ On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
 
 or Add the following configuration:
 
-```json
+```bash
 git clone https://github.com/tatn/mcp-server-diff-python.git
 cd mcp-server-diff-python
 uv sync
